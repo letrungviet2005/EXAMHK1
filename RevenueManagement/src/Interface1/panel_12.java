@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -91,7 +92,7 @@ public class panel_12 extends JPanel {
 					    String ThoiGian = rs10.getString("ThoiGian");
 					   
 					   
-					    model11.addRow(new Object[]{TenBan,ViTri,HoaDon,TongTien,ThoiGian});
+					    model11.addRow(new Object[]{TenBan,ViTri,HoaDon,formatNumber(TongTien),ThoiGian});
 					}
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
@@ -175,5 +176,11 @@ public class panel_12 extends JPanel {
 
 	public static void setThoiGian(String thoiGian) {
 		ThoiGian = thoiGian;
+	}
+	private static String formatNumber(int value) {
+	    DecimalFormat decimalFormat = new DecimalFormat("#,##0.###");
+	    decimalFormat.setGroupingUsed(true);
+	    decimalFormat.setGroupingSize(3);
+	    return decimalFormat.format(value);
 	}
 }

@@ -912,7 +912,7 @@ public class TrangChuTests extends JFrame {
 			}
 		
 	
-		JLabel TongDoanhThuTheoNgay = new JLabel(":"+doanhthuthang+" VND");
+		JLabel TongDoanhThuTheoNgay = new JLabel(":"+formatNumber(doanhthuthang)+" VND");
 		TongDoanhThuTheoNgay.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		TongDoanhThuTheoNgay.setForeground(Color.WHITE);
 		TongDoanhThuTheoNgay.setBounds(165, 40, 107, 30);
@@ -947,7 +947,7 @@ public class TrangChuTests extends JFrame {
 		panel_4.add(lblNewLabel_13_1);
 		
 		
-		JLabel TongLoiNhuanTheoNgay = new JLabel(":"+loinhuanthang+" VND");
+		JLabel TongLoiNhuanTheoNgay = new JLabel(":"+formatNumber(loinhuanthang)+" VND");
 		TongLoiNhuanTheoNgay.setForeground(Color.WHITE);
 		TongLoiNhuanTheoNgay.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		TongLoiNhuanTheoNgay.setBounds(165, 40, 107, 30);
@@ -1447,5 +1447,11 @@ public class TrangChuTests extends JFrame {
 	    int month = calendar.get(Calendar.MONTH) + 1;
 	    DecimalFormat decimalFormat = new DecimalFormat("00"); // Định dạng thành số có 2 chữ số, nếu nhỏ hơn 10 sẽ có số 0 đằng trước
 	    return decimalFormat.format(month);
+	}
+	private static String formatNumber(int value) {
+	    DecimalFormat decimalFormat = new DecimalFormat("#,##0.###");
+	    decimalFormat.setGroupingUsed(true);
+	    decimalFormat.setGroupingSize(3);
+	    return decimalFormat.format(value);
 	}
 }

@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -23,6 +25,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -68,6 +71,8 @@ public class ChinhSuaThongTinBan extends JFrame {
     private static int doanhThu1;
     private static int loiNhuan1;
     private static int donhangbanduochomnay;
+    private int thanhtien1;
+    private int num;
 	/**
 	 * Launch the application.
 	 */
@@ -444,6 +449,8 @@ public class ChinhSuaThongTinBan extends JFrame {
 		panel_2.add(textFieldgiamgia);
 		textFieldgiamgia.setColumns(10);
 		
+	
+		
 		JLabel lblNewLabel_4 = new JLabel("(Nhập % giảm nếu có)");
 		lblNewLabel_4.setBounds(144, 197, 123, 13);
 		panel_2.add(lblNewLabel_4);
@@ -462,6 +469,8 @@ public class ChinhSuaThongTinBan extends JFrame {
 		ThanhTien.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		ThanhTien.setBounds(100, 217, 123, 13);
 		panel_2.add(ThanhTien);
+		
+		
 		
 		JButton ThanhToanInHoaDon = new JButton("Thanh Toán & In Hóa Đơn");
 		ThanhToanInHoaDon.setBackground(new Color(30, 144, 255));
@@ -483,16 +492,13 @@ public class ChinhSuaThongTinBan extends JFrame {
 					if (textFieldgiamgia.getText().isEmpty()) {
 						int thanhtien1 =totalbill;
 						 String thanhtien=String.valueOf(thanhtien1);
-						 System.out.println(thanhtien);
-						 System.out.println(thanhtien1);
 						 ThanhTien.setText(thanhtien);
 						
 					} else {
 						num = Integer.parseInt(textFieldgiamgia.getText());
 					int thanhtien1 =totalbill-(totalbill*num/100);
 					 String thanhtien=String.valueOf(thanhtien1);
-					 System.out.println(thanhtien);
-					 System.out.println(thanhtien1);
+					 
 					 ThanhTien.setText(thanhtien);
 				
 					}
@@ -503,6 +509,40 @@ public class ChinhSuaThongTinBan extends JFrame {
 				 
 			}
 		});
+		
+		textFieldgiamgia.getDocument().addDocumentListener(new DocumentListener() {
+		    @Override
+		    public void insertUpdate(DocumentEvent e) {
+		        // Thực hiện hành động khi có từ mới được nhập vào textFieldgiamgia
+		     
+		        num = Integer.parseInt(textFieldgiamgia.getText());
+		        if (num>100) {
+		        	JOptionPane.showMessageDialog(null, "Vui Lòng Nhập Số Hợp Lệ!",
+                            "Thông báo", JOptionPane.ERROR_MESSAGE);
+		        } else if(textFieldgiamgia.getText().isEmpty()) {
+		        	thanhtien1 = totalbill;
+		        	
+		        }else {
+		        
+				  thanhtien1 =totalbill-(totalbill*num/100);
+				 String thanhtien=String.valueOf(thanhtien1);
+				 ThanhTien.setText(thanhtien+ " đ");
+		        }
+		       
+		      
+		    }
+
+		    @Override
+		    public void removeUpdate(DocumentEvent e) {
+		        // Không cần xử lý sự kiện này
+		    }
+
+		    @Override
+		    public void changedUpdate(DocumentEvent e) {
+		        // Không cần xử lý sự kiện này
+		    }
+		});
+		
 		JButton HuyBo = new JButton("Hủy Bỏ");
 		HuyBo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -640,7 +680,7 @@ public class ChinhSuaThongTinBan extends JFrame {
 						 st1.executeUpdate(sql3);
 						 st2.executeUpdate(sql4);
 						 
-						 JOptionPane.showMessageDialog(null,htmlData+"\n"+"  Tong :"+totalbill+ " đ"+"\n"+ThoiGian+"\n"+  "  Thanh Toan Thanh Cong!",
+						 JOptionPane.showMessageDialog(null,htmlData+"\n"+"  Tong :"+formatNumber(totalbill)+ " đ"+"\n"+"  Thành Tiền:"+formatNumber(thanhtien1)+"đ\n"+ThoiGian+"\n"+  "  Thanh Toan Thanh Cong!",
 	                             "Thông báo", JOptionPane.INFORMATION_MESSAGE);
 						 
 					     dulieuban = "Ten Mon\t\t\t\tGia Tien\tSL\tThanh Tien\n";
@@ -658,7 +698,7 @@ public class ChinhSuaThongTinBan extends JFrame {
 								    
 								     doanhThu1 = num1;
 								     loiNhuan1=num2;
-								     doanhThu1+=totalbill;
+								     doanhThu1+=thanhtien1;
 								     loiNhuan1+=loinhuanbill;
 								     String sql66 =" UPDATE doanhthutheothang SET DoanhThu="+doanhThu1+",LoiNhuan="+loiNhuan1+" WHERE taikhoanid="+TrangDangNhap.getId()+" AND  thangnam='"+time+"/2024';";
 								     st6.executeUpdate(sql66);
@@ -701,5 +741,11 @@ public class ChinhSuaThongTinBan extends JFrame {
 
 	public static void setLoiNhuan(int loiNhuan) {
 		LoiNhuan = loiNhuan;
+	}
+	private static String formatNumber(int value) {
+	    DecimalFormat decimalFormat = new DecimalFormat("#,##0.###");
+	    decimalFormat.setGroupingUsed(true);
+	    decimalFormat.setGroupingSize(3);
+	    return decimalFormat.format(value);
 	}
 }

@@ -148,7 +148,7 @@ public class TrangDangNhap {
 	                        }
 	                        if (found) {
 	                        	  Connection con = JDBCUtil.getConnection();
-	              	            Statement st = null;
+	              	              Statement st = null;
 	              				try {
 	              					st = con.createStatement();
 	              					String sql2 = "SELECT * FROM thongtin WHERE taikhoanid="+id+";";

@@ -50,15 +50,16 @@ public class ThongTinlichsuban extends JFrame {
 	public ThongTinlichsuban() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("images/th (2).jpg"));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(400, 100, 560, 671);
+		setBounds(400, 100, 560, 658);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(32, 178, 170));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
+		setResizable(false);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
 		panel.setBounds(0, 40, 546, 584);
 		contentPane.add(panel);
 		panel.setLayout(null);
@@ -125,8 +126,8 @@ public class ThongTinlichsuban extends JFrame {
 		panel.add(btnNewButton);
 		
 		JLabel lblNewLabel = new JLabel("Thông Tin Lịch Sử Bàn :");
-		lblNewLabel.setForeground(new Color(128, 0, 0));
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel.setForeground(Color.BLUE);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblNewLabel.setBounds(0, 10, 305, 20);
 		contentPane.add(lblNewLabel);
 		

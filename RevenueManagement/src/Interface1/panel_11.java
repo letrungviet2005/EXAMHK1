@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -102,7 +103,7 @@ public class panel_11 extends JPanel {
 		  int id =TrangDangNhap.getId();
 		  int doanhThu = ThongTinDao.getDoanhThuByID(list2, id);
 		 String strNumber = String.valueOf(doanhThu);
-		JLabel lblNewLabel_4 = new JLabel(strNumber+"   VND");
+		JLabel lblNewLabel_4 = new JLabel(formatNumber(strNumber)+"   VND");
 		
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		lblNewLabel_4.setForeground(Color.RED);
@@ -123,7 +124,7 @@ public class panel_11 extends JPanel {
 		int loiNhuan = ThongTinDao.getLoiNhuanbyid(list2, id);
 		String strNumber1 = String.valueOf(loiNhuan);
 		
-		JLabel lblNewLabel_4_2 = new JLabel(strNumber1+"  VND");
+		JLabel lblNewLabel_4_2 = new JLabel(formatNumber(strNumber1)+"  VND");
 		lblNewLabel_4_2.setForeground(Color.RED);
 		lblNewLabel_4_2.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		lblNewLabel_4_2.setBounds(159, 8, 292, 33);
@@ -297,8 +298,7 @@ public class panel_11 extends JPanel {
         try {
 			ResultSet rs1 = st.executeQuery(sql2);
 			while (rs1.next()) {
-			    int taikhoanid = rs1.getInt("taikhoanid");
-			    String thangnam = rs1.getString("thangnam");
+			   
 			    String doanhthu=rs1.getString("doanhthu");
 			  doanhthu11.add(doanhthu);
 			   
@@ -339,40 +339,40 @@ public class panel_11 extends JPanel {
 	    double width1 = (num1 / 100000000.0) * 1100;
 
 	    doanhthuthang12.setBounds((int) width12 +10, 22, 85, 13);
-	    doanhthuthang12.setText(doanhthu11.get(0)+" đ");
+	    doanhthuthang12.setText(formatNumber(doanhthu11.get(0))+" đ");
 	    
 	    doanhthuthang11.setBounds((int) width11+10, 75, 85, 13);
-	    doanhthuthang11.setText(doanhthu11.get(1)+" đ");
+	    doanhthuthang11.setText(formatNumber(doanhthu11.get(1))+" đ");
 	    
 	    doanhthuthang10.setBounds((int) width10+10, 135, 85, 13);
-	    doanhthuthang10.setText(doanhthu11.get(2)+" đ");
+	    doanhthuthang10.setText(formatNumber(doanhthu11.get(2))+" đ");
 	    
 	    doanhthuthang9.setBounds((int) width9+10, 193, 85, 13);
-	    doanhthuthang9.setText(doanhthu11.get(3)+" đ");
+	    doanhthuthang9.setText(formatNumber(doanhthu11.get(3))+" đ");
 	    
 	    doanhthuthang8.setBounds((int) width8+10, 251, 85, 13);
-	    doanhthuthang8.setText(doanhthu11.get(4)+" đ");
+	    doanhthuthang8.setText(formatNumber(doanhthu11.get(4))+" đ");
 	    
 	    doanhthuthang7.setBounds((int) width7+10, 308, 85, 13);
-	    doanhthuthang7.setText(doanhthu11.get(5)+" đ");
+	    doanhthuthang7.setText(formatNumber(doanhthu11.get(5))+" đ");
 	    
 	    doanhthuthang6.setBounds((int) width6+10, 363, 85, 13);
-	    doanhthuthang6.setText(doanhthu11.get(6)+" đ");
+	    doanhthuthang6.setText(formatNumber(doanhthu11.get(6))+" đ");
 	    
 	    doanhthuthang5.setBounds((int) width5+10, 414, 85, 13);
-	    doanhthuthang5.setText(doanhthu11.get(7)+" đ");
+	    doanhthuthang5.setText(formatNumber(doanhthu11.get(7))+" đ");
 	    
 	    doanhthuthang4.setBounds((int) width4+10, 468, 85, 13);
-	    doanhthuthang4.setText(doanhthu11.get(8)+" đ");
+	    doanhthuthang4.setText(formatNumber(doanhthu11.get(8))+" đ");
 	    
 	    doanhthuthang3.setBounds((int) width3+10, 531, 85, 13);
-	    doanhthuthang3.setText(doanhthu11.get(9)+" đ");
+	    doanhthuthang3.setText(formatNumber(doanhthu11.get(9))+" đ");
 	    
 	    doanhthuthang2.setBounds((int) width2+10, 590, 85, 13);
-	    doanhthuthang2.setText(doanhthu11.get(10)+" đ");
+	    doanhthuthang2.setText(formatNumber(doanhthu11.get(10))+" đ");
 	    
 	    doanhthuthang1.setBounds((int) width1+10, 638, 85, 13);
-	    doanhthuthang1.setText(doanhthu11.get(11)+" đ");
+	    doanhthuthang1.setText(formatNumber(doanhthu11.get(11))+" đ");
 	    
 	    JPanel panel_4 = new JPanel();
 	    panel_4.setBackground(Color.RED);
@@ -527,13 +527,13 @@ public class panel_11 extends JPanel {
 				opendothithang();
 				
 				thongketheonam.setVisible(false);
-				System.out.println(doanhthu11);
+				
 				}else if (thongketheo.equals("Theo Tháng") && selectedYear.equals("2024")) {
 					doanhthu11.clear();
 					opendothithang2024();
 					
 					thongketheonam.setVisible(false);
-					System.out.println(doanhthu11);
+					
 					} else {
 					
 					panel_3.setVisible(false);
@@ -663,40 +663,40 @@ public class panel_11 extends JPanel {
 				    double width1 = (num1 / 100000000.0) * 1100;
 
 				    doanhthuthang12.setBounds((int) width12 +10, 22, 85, 13);
-				    doanhthuthang12.setText(doanhthu11.get(0)+" đ");
+				    doanhthuthang12.setText(formatNumber(doanhthu11.get(0))+" đ");
 				    
 				    doanhthuthang11.setBounds((int) width11+10, 75, 85, 13);
-				    doanhthuthang11.setText(doanhthu11.get(1)+" đ");
+				    doanhthuthang11.setText(formatNumber(doanhthu11.get(1))+" đ");
 				    
 				    doanhthuthang10.setBounds((int) width10+10, 135, 85, 13);
-				    doanhthuthang10.setText(doanhthu11.get(2)+" đ");
+				    doanhthuthang10.setText(formatNumber(doanhthu11.get(2))+" đ");
 				    
 				    doanhthuthang9.setBounds((int) width9+10, 193, 85, 13);
-				    doanhthuthang9.setText(doanhthu11.get(3)+" đ");
+				    doanhthuthang9.setText(formatNumber(doanhthu11.get(3))+" đ");
 				    
 				    doanhthuthang8.setBounds((int) width8+10, 251, 85, 13);
-				    doanhthuthang8.setText(doanhthu11.get(4)+" đ");
+				    doanhthuthang8.setText(formatNumber(doanhthu11.get(4))+" đ");
 				    
 				    doanhthuthang7.setBounds((int) width7+10, 308, 85, 13);
-				    doanhthuthang7.setText(doanhthu11.get(5)+" đ");
+				    doanhthuthang7.setText(formatNumber(doanhthu11.get(5))+" đ");
 				    
 				    doanhthuthang6.setBounds((int) width6+10, 363, 85, 13);
-				    doanhthuthang6.setText(doanhthu11.get(6)+" đ");
+				    doanhthuthang6.setText(formatNumber(doanhthu11.get(6))+" đ");
 				    
 				    doanhthuthang5.setBounds((int) width5+10, 414, 85, 13);
-				    doanhthuthang5.setText(doanhthu11.get(7)+" đ");
+				    doanhthuthang5.setText(formatNumber(doanhthu11.get(7))+" đ");
 				    
 				    doanhthuthang4.setBounds((int) width4+10, 468, 85, 13);
-				    doanhthuthang4.setText(doanhthu11.get(8)+" đ");
+				    doanhthuthang4.setText(formatNumber(doanhthu11.get(8))+" đ");
 				    
 				    doanhthuthang3.setBounds((int) width3+10, 531, 85, 13);
-				    doanhthuthang3.setText(doanhthu11.get(9)+" đ");
+				    doanhthuthang3.setText(formatNumber(doanhthu11.get(9))+" đ");
 				    
 				    doanhthuthang2.setBounds((int) width2+10, 590, 85, 13);
-				    doanhthuthang2.setText(doanhthu11.get(10)+" đ");
+				    doanhthuthang2.setText(formatNumber(doanhthu11.get(10))+" đ");
 				    
 				    doanhthuthang1.setBounds((int) width1+10, 638, 85, 13);
-				    doanhthuthang1.setText(doanhthu11.get(11)+" đ");
+				    doanhthuthang1.setText(formatNumber(doanhthu11.get(11))+" đ");
 				    
 				    JPanel panel_4 = new JPanel();
 				    panel_4.setBackground(Color.RED);
@@ -757,7 +757,7 @@ public class panel_11 extends JPanel {
 					panel_4_1.setBackground(Color.RED);
 					panel_4_1.setBounds(0, 635, (int) width1, 31);
 					panel_3.add(panel_4_1);
-					System.out.println(doanhthu11);
+					
 				
 				// TODO Auto-generated method stub
 				int rong = 1168;
@@ -919,40 +919,40 @@ public class panel_11 extends JPanel {
 				    double width1 = (num1 / 1000000000.0) * 1100;
 
 				    doanhthuthang12.setBounds((int) width12 +10, 22, 85, 13);
-				    doanhthuthang12.setText(doanhthu11.get(0)+" đ");
+				    doanhthuthang12.setText(formatNumber(doanhthu11.get(0))+" đ");
 				    
 				    doanhthuthang11.setBounds((int) width11+10, 75, 85, 13);
-				    doanhthuthang11.setText(doanhthu11.get(1)+" đ");
+				    doanhthuthang11.setText(formatNumber(doanhthu11.get(1))+" đ");
 				    
 				    doanhthuthang10.setBounds((int) width10+10, 135, 85, 13);
-				    doanhthuthang10.setText(doanhthu11.get(2)+" đ");
+				    doanhthuthang10.setText(formatNumber(doanhthu11.get(2))+" đ");
 				    
 				    doanhthuthang9.setBounds((int) width9+10, 193, 85, 13);
-				    doanhthuthang9.setText(doanhthu11.get(3)+" đ");
+				    doanhthuthang9.setText(formatNumber(doanhthu11.get(3))+" đ");
 				    
 				    doanhthuthang8.setBounds((int) width8+10, 251, 85, 13);
-				    doanhthuthang8.setText(doanhthu11.get(4)+" đ");
+				    doanhthuthang8.setText(formatNumber(doanhthu11.get(4))+" đ");
 				    
 				    doanhthuthang7.setBounds((int) width7+10, 308, 85, 13);
-				    doanhthuthang7.setText(doanhthu11.get(5)+" đ");
+				    doanhthuthang7.setText(formatNumber(doanhthu11.get(5))+" đ");
 				    
 				    doanhthuthang6.setBounds((int) width6+10, 363, 85, 13);
-				    doanhthuthang6.setText(doanhthu11.get(6)+" đ");
+				    doanhthuthang6.setText(formatNumber(doanhthu11.get(6))+" đ");
 				    
 				    doanhthuthang5.setBounds((int) width5+10, 414, 85, 13);
-				    doanhthuthang5.setText(doanhthu11.get(7)+" đ");
+				    doanhthuthang5.setText(formatNumber(doanhthu11.get(7))+" đ");
 				    
 				    doanhthuthang4.setBounds((int) width4+10, 468, 85, 13);
-				    doanhthuthang4.setText(doanhthu11.get(8)+" đ");
+				    doanhthuthang4.setText(formatNumber(doanhthu11.get(8))+" đ");
 				    
 				    doanhthuthang3.setBounds((int) width3+10, 531, 85, 13);
-				    doanhthuthang3.setText(doanhthu11.get(9)+" đ");
+				    doanhthuthang3.setText(formatNumber(doanhthu11.get(9))+" đ");
 				    
 				    doanhthuthang2.setBounds((int) width2+10, 590, 85, 13);
-				    doanhthuthang2.setText(doanhthu11.get(10)+" đ");
+				    doanhthuthang2.setText(formatNumber(doanhthu11.get(10))+" đ");
 				    
 				    doanhthuthang1.setBounds((int) width1+10, 638, 85, 13);
-				    doanhthuthang1.setText(doanhthu11.get(11)+" đ");
+				    doanhthuthang1.setText(formatNumber(doanhthu11.get(11))+" đ");
 				    
 				    JPanel panel_4 = new JPanel();
 				    panel_4.setBackground(Color.RED);
@@ -1018,7 +1018,7 @@ public class panel_11 extends JPanel {
 				// TODO Auto-generated method stub
 				int rong = 1168;
 				int dai = 670;
-				System.out.println(doanhthu11);
+				
 			      
 				new Thread(new Runnable() {
 					public void run() {
@@ -1158,40 +1158,40 @@ public class panel_11 extends JPanel {
 				    double width1 = (num1 / 100000000.0) * 1100;
 
 				    doanhthuthang12.setBounds((int) width12 +10, 22, 85, 13);
-				    doanhthuthang12.setText(doanhthu11.get(0)+" đ");
+				    doanhthuthang12.setText(formatNumber(doanhthu11.get(0))+" đ");
 				    
 				    doanhthuthang11.setBounds((int) width11+10, 75, 85, 13);
-				    doanhthuthang11.setText(doanhthu11.get(1)+" đ");
+				    doanhthuthang11.setText(formatNumber(doanhthu11.get(1))+" đ");
 				    
 				    doanhthuthang10.setBounds((int) width10+10, 135, 85, 13);
-				    doanhthuthang10.setText(doanhthu11.get(2)+" đ");
+				    doanhthuthang10.setText(formatNumber(doanhthu11.get(2))+" đ");
 				    
 				    doanhthuthang9.setBounds((int) width9+10, 193, 85, 13);
-				    doanhthuthang9.setText(doanhthu11.get(3)+" đ");
+				    doanhthuthang9.setText(formatNumber(doanhthu11.get(3))+" đ");
 				    
 				    doanhthuthang8.setBounds((int) width8+10, 251, 85, 13);
-				    doanhthuthang8.setText(doanhthu11.get(4)+" đ");
+				    doanhthuthang8.setText(formatNumber(doanhthu11.get(4))+" đ");
 				    
 				    doanhthuthang7.setBounds((int) width7+10, 308, 85, 13);
-				    doanhthuthang7.setText(doanhthu11.get(5)+" đ");
+				    doanhthuthang7.setText(formatNumber(doanhthu11.get(5))+" đ");
 				    
 				    doanhthuthang6.setBounds((int) width6+10, 363, 85, 13);
-				    doanhthuthang6.setText(doanhthu11.get(6)+" đ");
+				    doanhthuthang6.setText(formatNumber(doanhthu11.get(6))+" đ");
 				    
 				    doanhthuthang5.setBounds((int) width5+10, 414, 85, 13);
-				    doanhthuthang5.setText(doanhthu11.get(7)+" đ");
+				    doanhthuthang5.setText(formatNumber(doanhthu11.get(7))+" đ");
 				    
 				    doanhthuthang4.setBounds((int) width4+10, 468, 85, 13);
-				    doanhthuthang4.setText(doanhthu11.get(8)+" đ");
+				    doanhthuthang4.setText(formatNumber(doanhthu11.get(8))+" đ");
 				    
 				    doanhthuthang3.setBounds((int) width3+10, 531, 85, 13);
-				    doanhthuthang3.setText(doanhthu11.get(9)+" đ");
+				    doanhthuthang3.setText(formatNumber(doanhthu11.get(9))+" đ");
 				    
 				    doanhthuthang2.setBounds((int) width2+10, 590, 85, 13);
-				    doanhthuthang2.setText(doanhthu11.get(10)+" đ");
+				    doanhthuthang2.setText(formatNumber(doanhthu11.get(10))+" đ");
 				    
 				    doanhthuthang1.setBounds((int) width1+10, 638, 85, 13);
-				    doanhthuthang1.setText(doanhthu11.get(11)+" đ");
+				    doanhthuthang1.setText(formatNumber(doanhthu11.get(11))+" đ");
 				    
 				    JPanel panel_4 = new JPanel();
 				    panel_4.setBackground(Color.RED);
@@ -1281,4 +1281,17 @@ public class panel_11 extends JPanel {
 		
 	
 	}
+    private static String formatNumber(String value) {
+        // Loại bỏ dấu chấm có thể có trong chuỗi
+        String numberWithoutCommas = value.replaceAll("\\.", "");
+
+        // Chuyển đổi chuỗi thành số
+        double number = Double.parseDouble(numberWithoutCommas);
+
+        // Định dạng số và thêm dấu chấm
+        DecimalFormat decimalFormat = new DecimalFormat("#,###.###");
+        String formattedNumber = decimalFormat.format(number);
+
+        return formattedNumber;
+    }
 }
